@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practicas Ajax</title>
     <script src="static/js/index.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
 </head>
 <body>
     <input type="text" name="" id="txt" placeholder="Pais">
     <button id="btnCargar">Cargar datos</button>
     <div id="contenido">
-        
-
+    
     </div>
+
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+    <img id="drag1" src="static/img/mapamundi-mudo.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
 </body>
 </html>
 

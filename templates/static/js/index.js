@@ -1,5 +1,10 @@
 var datos = [];
+var paises = [];
+var paisesSeleccionados = [];
+
 window.onload = () => {
+
+    cargarPaises();
 
 
     document.getElementById("btnCargar").onclick = () => {
@@ -23,5 +28,29 @@ window.onload = () => {
     }
 
 
+
+}
+
+
+function cargarPaises() {
+    let ajax = new XMLHttpRequest();
+    let url = `https://restcountries.com/v3.1/all`;
+    ajax.open("GET", url, true);
+    ajax.onload = () => {
+        paises = JSON.parse(ajax.responseText);
+        buscarPaises(10);
+        console.log(paisesSeleccionados)
+    }
+    ajax.send(null);
+}
+
+function buscarPaises(numeroPaises) {
+    let numAleatorio;
+    for (let i = 0; i < numeroPaises; i++) {
+        do {
+            numAleatorio = Math.floor(Math.random() * paises.length)
+        } while (paisesSeleccionados.includes(numAleatorio));
+        paisesSeleccionados.push(numAleatorio);
+    }
 
 }
