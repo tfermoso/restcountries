@@ -4,6 +4,25 @@ var paisesSeleccionados = [];
 
 window.onload = () => {
 
+        let mapa=document.getElementsByTagName("iframe")[0];
+        let enlacesPais=mapa.contentWindow.document.getElementsByTagName("a");
+        for (let i = 0; i < enlacesPais.length; i++) {
+            const element = enlacesPais[i];
+            element.onclick=(e)=>{
+                nombrePaisSeleccionado=e.currentTarget.getAttribute("xlink:title")
+                if(paises[paisesSeleccionados[0]].name.common==nombrePaisSeleccionado){
+                    alert("Enhorabuena");
+                    location.reload();
+                }else{
+                    alert("Has fallado")
+                }
+            }
+            element.onmouseover=(e)=>{
+                e.currentTarget.children[0].setAttribute("fill","blue")
+            }
+        }
+    
+
     cargarPaises();
 
 
@@ -38,7 +57,7 @@ function cargarPaises() {
     ajax.open("GET", url, true);
     ajax.onload = () => {
         paises = JSON.parse(ajax.responseText);
-        buscarPaises(10);
+        buscarPaises(1);
         console.log(paisesSeleccionados)
     }
     ajax.send(null);
@@ -52,5 +71,9 @@ function buscarPaises(numeroPaises) {
         } while (paisesSeleccionados.includes(numAleatorio));
         paisesSeleccionados.push(numAleatorio);
     }
+    let url=paises[paisesSeleccionados[0]].flags.png;
+    document.getElementById("imgBandera").src=url;
+    document.getElementById("nombrePais").innerText=paises[paisesSeleccionados[0]].name.common;
+
 
 }
