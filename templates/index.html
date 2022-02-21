@@ -7,6 +7,22 @@
     <title>Practicas Ajax</title>
     <script src="static/js/index.js"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+    <link rel="stylesheet" href="static/css/style.css">
+    <script>
+        function allowDrop(ev) {
+          ev.preventDefault();
+        }
+        
+        function drag(ev) {
+          ev.dataTransfer.setData("elemento", ev.target.id);
+        }
+        
+        function drop(ev) {
+          ev.preventDefault();
+          var data = ev.dataTransfer.getData("elemento");
+          ev.target.appendChild(document.getElementById(data));
+        }
+        </script>
 </head>
 <body>
     <input type="text" name="" id="txt" placeholder="Pais">
@@ -17,7 +33,10 @@
 
     <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 
-    <img id="drag1" src="static/img/mapamundi-mudo.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img id="drag1" src="static/img/mapamundi-mudo.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
+    </div>
+    <iframe src="static/img/world_map.svg" frameborder="0"></iframe>
 </body>
 </html>
 
